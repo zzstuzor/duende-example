@@ -93,6 +93,12 @@ internal static class HostingExtensions
                 config.Cookie.Name = CommonStatics.Cookie;
                 config.LoginPath = "/Account/Login";
                 config.LogoutPath = "/Account/Logout";
+            })
+            .AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder => builder
+                    .WithOrigins(new string[] { CommonStatics.URL_MyApi, CommonStatics.URL_Identity })
+                    .AllowAnyHeader());
             });
 
         // Add swagger
@@ -147,6 +153,7 @@ internal static class HostingExtensions
 
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseCors();
 
         app.UseAuthentication();
         app.UseIdentityServer();

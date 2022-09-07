@@ -41,7 +41,8 @@ public static class Config
                 {
                     new Uri(new Uri(CommonStatics.URL_Identity), "swagger/index.html").ToString(),
                     new Uri(new Uri(CommonStatics.URL_MyApi), "swagger/index.html").ToString(),
-                }
+                },
+                AllowedCorsOrigins = { CommonStatics.URL_Identity, CommonStatics.URL_MyApi },
             },
             new Client
             {
