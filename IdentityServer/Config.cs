@@ -1,5 +1,6 @@
 ﻿using Common;
 using Duende.IdentityServer.Models;
+using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace IdentityServer;
 
@@ -16,6 +17,7 @@ public static class Config
             {
                 new ApiScope(CommonStatics.Scope_IDS, "Identity API"),
                 new ApiScope(CommonStatics.Scope_MyApi, "My API"),
+                new ApiScope(LocalApi.ScopeName, "Duende Local API"),
             };
 
     public static IEnumerable<Client> Clients =>
@@ -26,7 +28,7 @@ public static class Config
                 ClientId = CommonStatics.Client_Swagger,
                 ClientSecrets = { new Secret(CommonStatics.Secret_Swagger.Sha256()) },
                 AllowedGrantTypes = { "authorization_code" },
-                AllowedScopes = { CommonStatics.Scope_IDS, CommonStatics.Scope_MyApi },
+                AllowedScopes = { CommonStatics.Scope_IDS, CommonStatics.Scope_MyApi, LocalApi.ScopeName },
                 AlwaysIncludeUserClaimsInIdToken = true,
                 AlwaysSendClientClaims = true,
                 AccessTokenLifetime = 1800,

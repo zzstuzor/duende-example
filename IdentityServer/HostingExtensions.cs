@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace IdentityServer;
 
@@ -79,6 +80,10 @@ internal static class HostingExtensions
             .AddIdentityServer(
                 options =>
                 {
+                    options.Events.RaiseErrorEvents = true;
+                    options.Events.RaiseInformationEvents = true;
+                    options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseSuccessEvents = true;
                     // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
                     options.EmitStaticAudienceClaim = true;
                 })
@@ -118,7 +123,8 @@ internal static class HostingExtensions
 
             var scopes = new Dictionary<string, string>
             {
-                { CommonStatics.Scope_IDS, "Identity API" }
+                { CommonStatics.Scope_IDS, "Identity API" },
+                { LocalApi.ScopeName, "Duende Local API" }
             };
             options.AddSecurityDefinition("OAuth2",
                 new OpenApiSecurityScheme
