@@ -28,6 +28,8 @@ public static class Configuration
                     {
                         ValidateIssuer = true,
                         ValidIssuer = CommonStatics.URL_Identity,
+
+                        ValidateAudience = false,
                     };
                 })
             .AddCookie(CommonStatics.Cookie)

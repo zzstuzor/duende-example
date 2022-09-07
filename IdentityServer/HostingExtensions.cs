@@ -46,6 +46,7 @@ internal static class HostingExtensions
                     {
                         ValidateIssuer = true,
                         ValidIssuer = CommonStatics.URL_Identity,
+                        ValidateAudience = false,
                         // etc
                     };
                 })
